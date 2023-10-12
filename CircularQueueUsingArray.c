@@ -28,11 +28,14 @@ int dequeue(int q[], int *f, int *r, int l)
     else
     {
         temp = q[*f];
-        (*f)++;
-        if((*f)-1==(*r))
+        if((*f)==(*r))
         {
             *f = -1;
             *r = -1;
+        }
+        else
+        {
+            *f = ((*f)+1)%l;
         }
     }
     return temp;
