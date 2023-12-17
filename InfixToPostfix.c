@@ -51,10 +51,13 @@ int prec(char val)
 {
     switch(val)
     {
+        case '(': return 0;
+        case ')': return 0;
         case '+': return 1;
         case '-': return 1;
         case '*': return 2;
         case '/': return 2;
+        default: return -1; 
     }
 }
 
@@ -70,9 +73,20 @@ int main()
         {
             push(sym, s[i], &top, l);
         }
-        if(s[i]>='a' && s[i]<='z')
+        else if(s[i]>='a' && s[i]<='z')
         {
             ans[j++] = s[i];
+        }
+        else if (s[i] == ')')
+        {
+            while (!(isEmpty(top)) && sym[top] != '(')
+            {
+                ans[j++] = pop(sym, &top, l);
+            }
+            if (!(isEmpty(top)) && sym[top] == '(')
+            {
+                pop(sym, &top, l);
+            }
         }
         else
         {
